@@ -1,0 +1,41 @@
+account_id,account_name,citizen_key,entity_type,vertical,billing_street,billing_city,billing_state,billing_postal_code,account_type,annual_revenue,employees,created_date
+ACC000001,John Smith,1,Individual,Resident,4624 Oak Street,Springfield,IL,62701,Resident,0,1,2021-07-17
+ACC000002,Mary Johnson,2,Individual,Resident,655 Maple Avenue,Springfield,IL,62702,Resident,0,1,2020-07-28
+ACC000003,Robert Davis,3,Individual,Resident,7050 Pine Street,Springfield,IL,62703,Resident,0,1,2020-06-27
+ACC000004,Sarah Wilson,4,Individual,Resident,43668 Elm Drive,Springfield,IL,62704,Resident,0,1,2020-03-02
+ACC000005,Michael Brown,5,Individual,Resident,948 Cedar Lane,Springfield,IL,62705,Resident,0,1,2022-10-31
+ACC000006,Jennifer Garcia,6,Individual,Resident,4552 Birch Road,Springfield,IL,62706,Resident,0,1,2021-02-11
+ACC000007,David Martinez,7,Individual,Resident,44799 Willow Way,Springfield,IL,62707,Resident,0,1,2022-05-09
+ACC000008,Lisa Anderson,8,Individual,Resident,614 Ash Street,Springfield,IL,62708,Resident,0,1,2020-01-14
+ACC000009,Christopher Taylor,9,Individual,Resident,24538 Poplar Avenue,Springfield,IL,62709,Resident,0,1,2021-11-27
+ACC000010,Amanda Thomas,10,Individual,Resident,0283 Hickory Drive,Springfield,IL,62710,Resident,0,1,2020-08-15
+ACC000011,Springfield Community Center,21,Organization,Non-Profit,1234 Main Street,Springfield,IL,62701,Non-Profit,500000,25,2020-01-01
+ACC000012,First Baptist Church,22,Organization,Religious,5678 Church Street,Springfield,IL,62702,Religious,200000,15,2020-02-01
+ACC000013,Springfield Public Library,23,Organization,Government,9012 Library Lane,Springfield,IL,62703,Government,1000000,50,2020-03-01
+ACC000014,Springfield Elementary School,24,Organization,Education,3456 School Avenue,Springfield,IL,62704,Education,2000000,100,2020-04-01
+ACC000015,Springfield High School,25,Organization,Education,7890 Education Drive,Springfield,IL,62705,Education,3000000,150,2020-05-01
+ACC000016,Springfield Medical Center,26,Organization,Healthcare,2468 Health Street,Springfield,IL,62706,Healthcare,5000000,200,2020-06-01
+ACC000017,Springfield Chamber of Commerce,27,Organization,Business,1357 Commerce Way,Springfield,IL,62707,Business,300000,10,2020-07-01
+ACC000018,Springfield Rotary Club,28,Organization,Service,8024 Service Road,Springfield,IL,62708,Service,100000,5,2020-08-01
+ACC000019,Springfield Food Bank,29,Organization,Non-Profit,4680 Food Drive,Springfield,IL,62709,Non-Profit,400000,20,2020-09-01
+ACC000020,Springfield Animal Shelter,30,Organization,Non-Profit,3579 Animal Lane,Springfield,IL,62710,Non-Profit,150000,8,2020-10-01
+ACC000021,ABC Construction Company,31,Business,Construction,1234 Construction Way,Springfield,IL,62701,Contractor,2000000,50,2020-01-15
+ACC000022,XYZ Restaurant,32,Business,Food Service,5678 Restaurant Row,Springfield,IL,62702,Restaurant,500000,15,2020-02-15
+ACC000023,Springfield Auto Repair,33,Business,Automotive,9012 Auto Avenue,Springfield,IL,62703,Automotive,300000,10,2020-03-15
+ACC000024,Springfield Law Firm,34,Business,Legal Services,3456 Legal Lane,Springfield,IL,62704,Legal,800000,25,2020-04-15
+ACC000025,Springfield Accounting Services,35,Business,Professional Services,7890 Accounting Avenue,Springfield,IL,62705,Accounting,400000,12,2020-05-15
+ACC000026,Springfield Real Estate,36,Business,Real Estate,2468 Real Estate Road,Springfield,IL,62706,Real Estate,600000,18,2020-06-15
+ACC000027,Springfield Insurance Agency,37,Business,Insurance,1357 Insurance Street,Springfield,IL,62707,Insurance,350000,8,2020-07-15
+ACC000028,Springfield Pharmacy,38,Business,Healthcare,8024 Pharmacy Lane,Springfield,IL,62708,Healthcare,250000,6,2020-08-15
+ACC000029,Springfield Hardware Store,39,Business,Retail,4680 Hardware Drive,Springfield,IL,62709,Retail,200000,5,2020-09-15
+ACC000030,Springfield Grocery Store,40,Business,Retail,3579 Grocery Avenue,Springfield,IL,62710,Retail,300000,8,2020-10-15
+ACC000031,Springfield Manufacturing Co,41,Business,Manufacturing,1234 Industrial Way,Springfield,IL,62701,Manufacturing,5000000,200,2020-01-30
+ACC000032,Springfield Tech Solutions,42,Business,Technology,5678 Tech Street,Springfield,IL,62702,Technology,1500000,75,2020-02-28
+ACC000033,Springfield Consulting Group,43,Business,Professional Services,9012 Consulting Lane,Springfield,IL,62703,Consulting,800000,30,2020-03-30
+ACC000034,Springfield Marketing Agency,44,Business,Marketing,3456 Marketing Avenue,Springfield,IL,62704,Marketing,600000,20,2020-04-30
+ACC000035,Springfield Financial Services,45,Business,Financial Services,7890 Finance Road,Springfield,IL,62705,Financial,1200000,40,2020-05-30
+ACC000036,Springfield Transportation Co,46,Business,Transportation,2468 Transport Street,Springfield,IL,62706,Transportation,900000,35,2020-06-30
+ACC000037,Springfield Energy Solutions,47,Business,Energy,1357 Energy Lane,Springfield,IL,62707,Energy,700000,25,2020-07-30
+ACC000038,Springfield Waste Management,48,Business,Environmental,8024 Waste Way,Springfield,IL,62708,Environmental,1000000,45,2020-08-30
+ACC000039,Springfield Security Services,49,Business,Security,4680 Security Street,Springfield,IL,62709,Security,400000,15,2020-09-30
+ACC000040,Springfield Cleaning Services,50,Business,Maintenance,3579 Cleaning Lane,Springfield,IL,62710,Maintenance,300000,12,2020-10-30

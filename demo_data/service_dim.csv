@@ -1,0 +1,101 @@
+service_key,service_name,category_key,category_name,vertical
+1,Building Permit Application,1,Permits & Licenses,Public Services
+2,Business License Renewal,1,Permits & Licenses,Public Services
+3,Fire Safety Inspection,2,Public Safety,Emergency Services
+4,Police Response Service,2,Public Safety,Emergency Services
+5,Road Maintenance,3,Infrastructure,Public Works
+6,Water System Repair,3,Infrastructure,Public Works
+7,Senior Center Program,4,Community Services,Social Services
+8,Youth Recreation Program,4,Community Services,Social Services
+9,Environmental Assessment,5,Environmental,Environmental Services
+10,Waste Management Service,5,Environmental,Environmental Services
+11,Community Park Access,6,Recreation,Parks & Recreation
+12,Swimming Pool Pass,6,Recreation,Parks & Recreation
+13,Library Card Registration,4,Community Services,Social Services
+14,Public Transportation Pass,3,Infrastructure,Public Works
+15,Animal Control Service,2,Public Safety,Emergency Services
+16,Code Enforcement Inspection,1,Permits & Licenses,Public Services
+17,Street Lighting Maintenance,3,Infrastructure,Public Works
+18,Parks & Recreation Program,6,Recreation,Parks & Recreation
+19,Public Health Clinic,4,Community Services,Social Services
+20,Emergency Medical Response,2,Public Safety,Emergency Services
+21,Traffic Signal Maintenance,3,Infrastructure,Public Works
+22,Public Meeting Room Rental,4,Community Services,Social Services
+23,Tree Trimming Service,5,Environmental,Environmental Services
+24,Public Art Installation,4,Community Services,Social Services
+25,Neighborhood Watch Program,2,Public Safety,Emergency Services
+26,Community Garden Plot,6,Recreation,Parks & Recreation
+27,Public WiFi Access,3,Infrastructure,Public Works
+28,Senior Transportation Service,4,Community Services,Social Services
+29,Recycling Program,5,Environmental,Environmental Services
+30,Public Safety Training,2,Public Safety,Emergency Services
+31,Historic Preservation Review,1,Permits & Licenses,Public Services
+32,Public Pool Maintenance,6,Recreation,Parks & Recreation
+33,Street Cleaning Service,3,Infrastructure,Public Works
+34,Community Event Permit,1,Permits & Licenses,Public Services
+35,Public Housing Assistance,4,Community Services,Social Services
+36,Environmental Education Program,5,Environmental,Environmental Services
+37,Public Library Service,4,Community Services,Social Services
+38,Fire Prevention Education,2,Public Safety,Emergency Services
+39,Public Park Maintenance,6,Recreation,Parks & Recreation
+40,Water Quality Testing,5,Environmental,Environmental Services
+41,Public Transit Route Planning,3,Infrastructure,Public Works
+42,Community Development Grant,4,Community Services,Social Services
+43,Public Safety Equipment,2,Public Safety,Emergency Services
+44,Recreation Center Access,6,Recreation,Parks & Recreation
+45,Public Health Education,4,Community Services,Social Services
+46,Infrastructure Planning,3,Infrastructure,Public Works
+47,Public Safety Communication,2,Public Safety,Emergency Services
+48,Environmental Monitoring,5,Environmental,Environmental Services
+49,Public Art Maintenance,4,Community Services,Social Services
+50,Community Center Rental,4,Community Services,Social Services
+51,Public Safety Patrol,2,Public Safety,Emergency Services
+52,Recreation Equipment Rental,6,Recreation,Parks & Recreation
+53,Public Health Screening,4,Community Services,Social Services
+54,Infrastructure Inspection,3,Infrastructure,Public Works
+55,Environmental Cleanup,5,Environmental,Environmental Services
+56,Public Safety Training Facility,2,Public Safety,Emergency Services
+57,Community Garden Maintenance,6,Recreation,Parks & Recreation
+58,Public Health Outreach,4,Community Services,Social Services
+59,Public Transit Maintenance,3,Infrastructure,Public Works
+60,Environmental Protection Program,5,Environmental,Environmental Services
+61,Public Safety Emergency Response,2,Public Safety,Emergency Services
+62,Recreation Program Registration,6,Recreation,Parks & Recreation
+63,Public Health Vaccination,4,Community Services,Social Services
+64,Infrastructure Development,3,Infrastructure,Public Works
+65,Environmental Conservation,5,Environmental,Environmental Services
+66,Public Safety Investigation,2,Public Safety,Emergency Services
+67,Community Event Planning,4,Community Services,Social Services
+68,Public Transit Route Service,3,Infrastructure,Public Works
+69,Environmental Research,5,Environmental,Environmental Services
+70,Public Safety Community Outreach,2,Public Safety,Emergency Services
+71,Recreation Facility Management,6,Recreation,Parks & Recreation
+72,Public Health Data Collection,4,Community Services,Social Services
+73,Infrastructure Asset Management,3,Infrastructure,Public Works
+74,Environmental Policy Development,5,Environmental,Environmental Services
+75,Public Safety Crime Prevention,2,Public Safety,Emergency Services
+76,Community Development Planning,4,Community Services,Social Services
+77,Public Transit Scheduling,3,Infrastructure,Public Works
+78,Environmental Impact Assessment,5,Environmental,Environmental Services
+79,Public Safety Community Relations,2,Public Safety,Emergency Services
+80,Recreation Program Development,6,Recreation,Parks & Recreation
+81,Public Health Policy Development,4,Community Services,Social Services
+82,Infrastructure Budget Planning,3,Infrastructure,Public Works
+83,Environmental Compliance,5,Environmental,Environmental Services
+84,Public Safety Resource Allocation,2,Public Safety,Emergency Services
+85,Community Engagement Program,4,Community Services,Social Services
+86,Public Transit Performance Monitoring,3,Infrastructure,Public Works
+87,Environmental Sustainability,5,Environmental,Environmental Services
+88,Public Safety Performance Metrics,2,Public Safety,Emergency Services
+89,Recreation Program Evaluation,6,Recreation,Parks & Recreation
+90,Public Health Program Assessment,4,Community Services,Social Services
+91,Infrastructure Performance Monitoring,3,Infrastructure,Public Works
+92,Environmental Program Evaluation,5,Environmental,Environmental Services
+93,Public Safety Community Feedback,2,Public Safety,Emergency Services
+94,Community Service Coordination,4,Community Services,Social Services
+95,Public Transit Community Outreach,3,Infrastructure,Public Works
+96,Environmental Community Education,5,Environmental,Environmental Services
+97,Public Safety Training Program,2,Public Safety,Emergency Services
+98,Recreation Community Partnership,6,Recreation,Parks & Recreation
+99,Public Health Community Partnership,4,Community Services,Social Services
+100,Infrastructure Community Engagement,3,Infrastructure,Public Works

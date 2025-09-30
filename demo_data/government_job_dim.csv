@@ -1,0 +1,152 @@
+job_key,job_title,job_level
+800,City Manager,10
+801,Deputy City Manager,9
+802,Department Director,8
+803,Assistant Director,7
+804,Division Manager,6
+805,Supervisor,5
+806,Senior Specialist,4
+807,Specialist,3
+808,Coordinator,2
+809,Assistant,1
+810,Intern,0
+811,Mayor,10
+812,City Council Member,9
+813,City Attorney,8
+814,City Clerk,7
+815,Finance Director,8
+816,Public Works Director,8
+817,Police Chief,8
+818,Fire Chief,8
+819,Public Health Director,8
+820,HR Director,8
+821,IT Director,8
+822,Planning Director,8
+823,Recreation Director,8
+824,Library Director,8
+825,Parks Director,8
+826,Transportation Director,8
+827,Environmental Director,8
+828,Emergency Management Director,8
+829,Community Development Director,8
+830,Public Relations Director,8
+831,Budget Analyst,4
+832,Financial Analyst,4
+833,Accountant,3
+834,Auditor,4
+835,Procurement Specialist,3
+836,Contract Administrator,4
+837,Grant Writer,3
+838,Revenue Specialist,3
+839,Treasury Specialist,3
+840,Compliance Officer,4
+841,Engineer,5
+842,Senior Engineer,6
+843,Project Manager,5
+844,Construction Manager,5
+845,Inspector,3
+846,Code Enforcement Officer,3
+847,Permit Specialist,3
+848,Planning Specialist,4
+849,Urban Planner,5
+850,Zoning Specialist,4
+851,Police Officer,3
+852,Detective,4
+853,Sergeant,4
+854,Lieutenant,5
+855,Captain,6
+856,Commander,7
+857,Deputy Chief,7
+858,Firefighter,3
+859,Fire Inspector,4
+860,Fire Captain,5
+861,Fire Battalion Chief,6
+862,Fire Deputy Chief,7
+863,Paramedic,3
+864,EMT,2
+865,Dispatcher,3
+866,Emergency Coordinator,4
+867,Public Health Nurse,4
+868,Health Inspector,4
+869,Environmental Health Specialist,4
+870,Public Health Educator,3
+871,Social Worker,4
+872,Case Manager,3
+873,Community Outreach Specialist,3
+874,Youth Program Coordinator,3
+875,Senior Services Coordinator,3
+876,Recreation Specialist,3
+877,Program Coordinator,3
+878,Event Coordinator,3
+879,Volunteer Coordinator,3
+880,Community Center Manager,5
+881,Library Assistant,2
+882,Librarian,4
+883,Library Director,6
+884,IT Specialist,4
+885,Network Administrator,5
+886,Database Administrator,5
+887,Software Developer,5
+888,Web Developer,4
+889,Systems Analyst,4
+890,Help Desk Technician,2
+891,Cybersecurity Specialist,5
+892,Data Analyst,4
+893,GIS Specialist,4
+894,Research Analyst,4
+895,Policy Analyst,5
+896,Legislative Analyst,5
+897,Performance Analyst,4
+898,Quality Assurance Specialist,4
+899,Training Specialist,4
+900,Human Resources Specialist,4
+901,Benefits Administrator,3
+902,Payroll Specialist,3
+903,Recruiter,3
+904,Employee Relations Specialist,4
+905,Workers Compensation Specialist,3
+906,Public Relations Specialist,4
+907,Communications Specialist,4
+908,Media Relations Specialist,4
+909,Community Relations Specialist,4
+910,Marketing Specialist,4
+911,Graphic Designer,3
+912,Content Writer,3
+913,Social Media Specialist,3
+914,Website Administrator,4
+915,Video Producer,4
+916,Photographer,3
+917,Event Planner,4
+918,Meeting Coordinator,3
+919,Facilities Manager,5
+920,Maintenance Supervisor,4
+921,Custodian,1
+922,Janitor,1
+923,Groundskeeper,2
+924,Landscaper,2
+925,Mechanic,3
+926,Technician,3
+927,Operator,2
+928,Driver,2
+929,Administrative Assistant,2
+930,Executive Assistant,3
+931,Receptionist,1
+932,Office Manager,4
+933,Records Clerk,2
+934,Data Entry Clerk,2
+935,File Clerk,1
+936,Secretary,2
+937,Legal Secretary,3
+938,Paralegal,4
+939,Legal Assistant,3
+940,Law Clerk,2
+941,Intern,0
+942,Volunteer,0
+943,Consultant,6
+944,Contractor,5
+945,Temporary Employee,2
+946,Part-time Employee,2
+947,Seasonal Employee,2
+948,On-call Employee,2
+949,Reserve Employee,2
+950,Emergency Employee,3

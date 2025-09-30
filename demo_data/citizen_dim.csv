@@ -1,0 +1,101 @@
+citizen_key,citizen_name,entity_type,vertical,address,city,state,zip
+1,John Smith,Individual,Resident,4624 Oak Street,Springfield,IL,62701
+2,Mary Johnson,Individual,Resident,655 Maple Avenue,Springfield,IL,62702
+3,Robert Davis,Individual,Resident,7050 Pine Street,Springfield,IL,62703
+4,Sarah Wilson,Individual,Resident,43668 Elm Drive,Springfield,IL,62704
+5,Michael Brown,Individual,Resident,948 Cedar Lane,Springfield,IL,62705
+6,Jennifer Garcia,Individual,Resident,4552 Birch Road,Springfield,IL,62706
+7,David Martinez,Individual,Resident,44799 Willow Way,Springfield,IL,62707
+8,Lisa Anderson,Individual,Resident,614 Ash Street,Springfield,IL,62708
+9,Christopher Taylor,Individual,Resident,24538 Poplar Avenue,Springfield,IL,62709
+10,Amanda Thomas,Individual,Resident,0283 Hickory Drive,Springfield,IL,62710
+11,James Jackson,Individual,Resident,5203 Sycamore Street,Springfield,IL,62711
+12,Jessica White,Individual,Resident,92205 Chestnut Lane,Springfield,IL,62712
+13,Daniel Harris,Individual,Resident,89741 Dogwood Road,Springfield,IL,62713
+14,Michelle Martin,Individual,Resident,5172 Magnolia Street,Springfield,IL,62714
+15,Matthew Thompson,Individual,Resident,576 Redwood Avenue,Springfield,IL,62715
+16,Ashley Garcia,Individual,Resident,1580 Spruce Drive,Springfield,IL,62716
+17,Andrew Miller,Individual,Resident,6042 Cypress Lane,Springfield,IL,62717
+18,Stephanie Davis,Individual,Resident,0939 Fir Street,Springfield,IL,62718
+19,Joshua Rodriguez,Individual,Resident,8567 Hemlock Avenue,Springfield,IL,62719
+20,Elizabeth Wilson,Individual,Resident,2345 Juniper Road,Springfield,IL,62720
+21,Springfield Community Center,Organization,Non-Profit,1234 Main Street,Springfield,IL,62701
+22,First Baptist Church,Organization,Religious,5678 Church Street,Springfield,IL,62702
+23,Springfield Public Library,Organization,Government,9012 Library Lane,Springfield,IL,62703
+24,Springfield Elementary School,Organization,Education,3456 School Avenue,Springfield,IL,62704
+25,Springfield High School,Organization,Education,7890 Education Drive,Springfield,IL,62705
+26,Springfield Medical Center,Organization,Healthcare,2468 Health Street,Springfield,IL,62706
+27,Springfield Chamber of Commerce,Organization,Business,1357 Commerce Way,Springfield,IL,62707
+28,Springfield Rotary Club,Organization,Service,8024 Service Road,Springfield,IL,62708
+29,Springfield Food Bank,Organization,Non-Profit,4680 Food Drive,Springfield,IL,62709
+30,Springfield Animal Shelter,Organization,Non-Profit,3579 Animal Lane,Springfield,IL,62710
+31,ABC Construction Company,Business,Construction,1234 Construction Way,Springfield,IL,62701
+32,XYZ Restaurant,Business,Food Service,5678 Restaurant Row,Springfield,IL,62702
+33,Springfield Auto Repair,Business,Automotive,9012 Auto Avenue,Springfield,IL,62703
+34,Springfield Law Firm,Business,Legal Services,3456 Legal Lane,Springfield,IL,62704
+35,Springfield Accounting Services,Business,Professional Services,7890 Accounting Avenue,Springfield,IL,62705
+36,Springfield Real Estate,Business,Real Estate,2468 Real Estate Road,Springfield,IL,62706
+37,Springfield Insurance Agency,Business,Insurance,1357 Insurance Street,Springfield,IL,62707
+38,Springfield Pharmacy,Business,Healthcare,8024 Pharmacy Lane,Springfield,IL,62708
+39,Springfield Hardware Store,Business,Retail,4680 Hardware Drive,Springfield,IL,62709
+40,Springfield Grocery Store,Business,Retail,3579 Grocery Avenue,Springfield,IL,62710
+41,Springfield Manufacturing Co,Business,Manufacturing,1234 Industrial Way,Springfield,IL,62701
+42,Springfield Tech Solutions,Business,Technology,5678 Tech Street,Springfield,IL,62702
+43,Springfield Consulting Group,Business,Professional Services,9012 Consulting Lane,Springfield,IL,62703
+44,Springfield Marketing Agency,Business,Marketing,3456 Marketing Avenue,Springfield,IL,62704
+45,Springfield Financial Services,Business,Financial Services,7890 Finance Road,Springfield,IL,62705
+46,Springfield Transportation Co,Business,Transportation,2468 Transport Street,Springfield,IL,62706
+47,Springfield Energy Solutions,Business,Energy,1357 Energy Lane,Springfield,IL,62707
+48,Springfield Waste Management,Business,Environmental,8024 Waste Way,Springfield,IL,62708
+49,Springfield Security Services,Business,Security,4680 Security Street,Springfield,IL,62709
+50,Springfield Cleaning Services,Business,Maintenance,3579 Cleaning Lane,Springfield,IL,62710
+51,Springfield Event Planning,Business,Event Services,1234 Event Way,Springfield,IL,62701
+52,Springfield Catering Co,Business,Food Service,5678 Catering Street,Springfield,IL,62702
+53,Springfield Printing Services,Business,Printing,9012 Printing Lane,Springfield,IL,62703
+54,Springfield Landscaping,Business,Landscaping,3456 Landscape Avenue,Springfield,IL,62704
+55,Springfield Plumbing Co,Business,Plumbing,7890 Plumbing Road,Springfield,IL,62705
+56,Springfield Electrical Services,Business,Electrical,2468 Electric Street,Springfield,IL,62706
+57,Springfield HVAC Services,Business,HVAC,1357 HVAC Lane,Springfield,IL,62707
+58,Springfield Roofing Co,Business,Construction,8024 Roofing Way,Springfield,IL,62708
+59,Springfield Painting Services,Business,Construction,4680 Painting Street,Springfield,IL,62709
+60,Springfield Flooring Co,Business,Construction,3579 Flooring Lane,Springfield,IL,62710
+61,Springfield Glass Services,Business,Construction,1234 Glass Way,Springfield,IL,62701
+62,Springfield Concrete Co,Business,Construction,5678 Concrete Street,Springfield,IL,62702
+63,Springfield Masonry Services,Business,Construction,9012 Masonry Lane,Springfield,IL,62703
+64,Springfield Carpentry Services,Business,Construction,3456 Carpentry Avenue,Springfield,IL,62704
+65,Springfield Welding Co,Business,Manufacturing,7890 Welding Road,Springfield,IL,62705
+66,Springfield Machine Shop,Business,Manufacturing,2468 Machine Street,Springfield,IL,62706
+67,Springfield Metal Works,Business,Manufacturing,1357 Metal Lane,Springfield,IL,62707
+68,Springfield Plastic Co,Business,Manufacturing,8024 Plastic Way,Springfield,IL,62708
+69,Springfield Textile Co,Business,Manufacturing,4680 Textile Street,Springfield,IL,62709
+70,Springfield Paper Co,Business,Manufacturing,3579 Paper Lane,Springfield,IL,62710
+71,Springfield Chemical Co,Business,Manufacturing,1234 Chemical Way,Springfield,IL,62701
+72,Springfield Packaging Co,Business,Manufacturing,5678 Packaging Street,Springfield,IL,62702
+73,Springfield Electronics Co,Business,Technology,9012 Electronics Lane,Springfield,IL,62703
+74,Springfield Software Co,Business,Technology,3456 Software Avenue,Springfield,IL,62704
+75,Springfield Data Services,Business,Technology,7890 Data Road,Springfield,IL,62705
+76,Springfield Network Solutions,Business,Technology,2468 Network Street,Springfield,IL,62706
+77,Springfield Web Design,Business,Technology,1357 Web Lane,Springfield,IL,62707
+78,Springfield Mobile Apps,Business,Technology,8024 Mobile Way,Springfield,IL,62708
+79,Springfield Cloud Services,Business,Technology,4680 Cloud Street,Springfield,IL,62709
+80,Springfield IT Support,Business,Technology,3579 IT Lane,Springfield,IL,62710
+81,Springfield Cybersecurity,Business,Technology,1234 Security Way,Springfield,IL,62701
+82,Springfield AI Solutions,Business,Technology,5678 AI Street,Springfield,IL,62702
+83,Springfield Blockchain Co,Business,Technology,9012 Blockchain Lane,Springfield,IL,62703
+84,Springfield IoT Solutions,Business,Technology,3456 IoT Avenue,Springfield,IL,62704
+85,Springfield Robotics Co,Business,Technology,7890 Robotics Road,Springfield,IL,62705
+86,Springfield Automation Co,Business,Technology,2468 Automation Street,Springfield,IL,62706
+87,Springfield Smart City Solutions,Business,Technology,1357 Smart Lane,Springfield,IL,62707
+88,Springfield Digital Services,Business,Technology,8024 Digital Way,Springfield,IL,62708
+89,Springfield Tech Consulting,Business,Technology,4680 Tech Street,Springfield,IL,62709
+90,Springfield Innovation Lab,Business,Technology,3579 Innovation Lane,Springfield,IL,62710
+91,Springfield Research Institute,Organization,Research,1234 Research Way,Springfield,IL,62701
+92,Springfield University,Organization,Education,5678 University Street,Springfield,IL,62702
+93,Springfield Community College,Organization,Education,9012 College Lane,Springfield,IL,62703
+94,Springfield Technical Institute,Organization,Education,3456 Technical Avenue,Springfield,IL,62704
+95,Springfield Arts Center,Organization,Arts,7890 Arts Road,Springfield,IL,62705
+96,Springfield Museum,Organization,Culture,2468 Museum Street,Springfield,IL,62706
+97,Springfield Historical Society,Organization,Culture,1357 History Lane,Springfield,IL,62707
+98,Springfield Sports Club,Organization,Recreation,8024 Sports Way,Springfield,IL,62708
+99,Springfield Youth Center,Organization,Youth Services,4680 Youth Street,Springfield,IL,62709
+100,Springfield Senior Center,Organization,Senior Services,3579 Senior Lane,Springfield,IL,62710

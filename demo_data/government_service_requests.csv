@@ -1,0 +1,51 @@
+service_request_id,service_id,account_id,service_request_name,status,amount,priority,close_date,created_date,request_source,type,communication_id
+SRQ00000001,1.0,ACC000030,Service Request 1,Completed,69133.46,High,2023-01-05,2022-07-04,Phone,New Request,15862
+SRQ00000002,2.0,ACC000994,Service Request 2,Completed,63927.25,Medium,2023-02-24,2021-11-09,Online,Existing Request - Upgrade,
+SRQ00000003,3.0,ACC000586,Service Request 3,Completed,78075.28,High,2024-10-04,2021-12-07,Phone,New Request,
+SRQ00000004,4.0,ACC000353,Service Request 4,Completed,20903.71,Low,2022-06-23,2022-04-15,Website,Existing Request - Replacement,24505
+SRQ00000005,5.0,ACC000796,Service Request 5,Completed,165596.69,High,2023-12-29,2021-11-02,Referral,Existing Request - Replacement,
+SRQ00000006,6.0,ACC000335,Service Request 6,Completed,31013.96,Medium,2024-02-13,2021-09-01,Other,Existing Request - Downgrade,
+SRQ00000007,7.0,ACC000928,Service Request 7,Completed,133172.83,High,2024-04-13,2021-11-05,Website,Existing Request - Upgrade,
+SRQ00000008,8.0,ACC000455,Service Request 8,Completed,216941.42,High,2023-03-13,2021-09-18,Public Meeting,Existing Request - Downgrade,
+SRQ00000009,9.0,ACC000978,Service Request 9,Completed,87643.3,Medium,2024-09-02,2024-04-21,Public Meeting,Existing Request - Replacement,22295
+SRQ00000010,10.0,ACC000123,Service Request 10,In Progress,50000.00,Medium,2024-12-31,2024-01-15,Phone,New Request,12345
+SRQ00000011,11.0,ACC000124,Service Request 11,In Progress,75000.00,High,2024-11-30,2024-02-20,Online,New Request,12346
+SRQ00000012,12.0,ACC000125,Service Request 12,In Progress,30000.00,Low,2024-10-15,2024-03-10,Phone,New Request,12347
+SRQ00000013,13.0,ACC000126,Service Request 13,In Progress,45000.00,Medium,2024-09-20,2024-04-05,Website,New Request,12348
+SRQ00000014,14.0,ACC000127,Service Request 14,In Progress,60000.00,High,2024-08-25,2024-05-12,Referral,New Request,12349
+SRQ00000015,15.0,ACC000128,Service Request 15,In Progress,25000.00,Low,2024-07-30,2024-06-18,Other,New Request,12350
+SRQ00000016,16.0,ACC000129,Service Request 16,In Progress,80000.00,High,2024-06-15,2024-07-25,Public Meeting,New Request,12351
+SRQ00000017,17.0,ACC000130,Service Request 17,In Progress,35000.00,Medium,2024-05-10,2024-08-30,Phone,New Request,12352
+SRQ00000018,18.0,ACC000131,Service Request 18,In Progress,55000.00,High,2024-04-05,2024-09-15,Online,New Request,12353
+SRQ00000019,19.0,ACC000132,Service Request 19,In Progress,40000.00,Medium,2024-03-20,2024-10-08,Website,New Request,12354
+SRQ00000020,20.0,ACC000133,Service Request 20,In Progress,70000.00,High,2024-02-14,2024-11-22,Referral,New Request,12355
+SRQ00000021,21.0,ACC000134,Service Request 21,In Progress,20000.00,Low,2024-01-09,2024-12-05,Other,New Request,12356
+SRQ00000022,22.0,ACC000135,Service Request 22,In Progress,65000.00,High,2023-12-25,2023-01-12,Public Meeting,New Request,12357
+SRQ00000023,23.0,ACC000136,Service Request 23,In Progress,30000.00,Medium,2023-11-20,2023-02-28,Phone,New Request,12358
+SRQ00000024,24.0,ACC000137,Service Request 24,In Progress,50000.00,High,2023-10-15,2023-03-15,Online,New Request,12359
+SRQ00000025,25.0,ACC000138,Service Request 25,In Progress,35000.00,Medium,2023-09-10,2023-04-22,Website,New Request,12360
+SRQ00000026,26.0,ACC000139,Service Request 26,In Progress,60000.00,High,2023-08-05,2023-05-30,Referral,New Request,12361
+SRQ00000027,27.0,ACC000140,Service Request 27,In Progress,25000.00,Low,2023-07-01,2023-06-18,Other,New Request,12362
+SRQ00000028,28.0,ACC000141,Service Request 28,In Progress,75000.00,High,2023-05-26,2023-07-25,Public Meeting,New Request,12363
+SRQ00000029,29.0,ACC000142,Service Request 29,In Progress,40000.00,Medium,2023-04-21,2023-08-12,Phone,New Request,12364
+SRQ00000030,30.0,ACC000143,Service Request 30,In Progress,55000.00,High,2023-03-16,2023-09-28,Online,New Request,12365
+SRQ00000031,31.0,ACC000144,Service Request 31,In Progress,30000.00,Medium,2023-02-09,2023-10-15,Website,New Request,12366
+SRQ00000032,32.0,ACC000145,Service Request 32,In Progress,45000.00,High,2023-01-05,2023-11-02,Referral,New Request,12367
+SRQ00000033,33.0,ACC000146,Service Request 33,In Progress,20000.00,Low,2022-12-01,2023-12-20,Other,New Request,12368
+SRQ00000034,34.0,ACC000147,Service Request 34,In Progress,65000.00,High,2022-10-26,2022-01-08,Public Meeting,New Request,12369
+SRQ00000035,35.0,ACC000148,Service Request 35,In Progress,35000.00,Medium,2022-09-21,2022-02-25,Phone,New Request,12370
+SRQ00000036,36.0,ACC000149,Service Request 36,In Progress,50000.00,High,2022-08-16,2022-03-15,Online,New Request,12371
+SRQ00000037,37.0,ACC000150,Service Request 37,In Progress,30000.00,Medium,2022-07-11,2022-04-22,Website,New Request,12372
+SRQ00000038,38.0,ACC000151,Service Request 38,In Progress,60000.00,High,2022-06-06,2022-05-30,Referral,New Request,12373
+SRQ00000039,39.0,ACC000152,Service Request 39,In Progress,25000.00,Low,2022-05-01,2022-06-18,Other,New Request,12374
+SRQ00000040,40.0,ACC000153,Service Request 40,In Progress,75000.00,High,2022-03-26,2022-07-25,Public Meeting,New Request,12375
+SRQ00000041,41.0,ACC000154,Service Request 41,In Progress,40000.00,Medium,2022-02-19,2022-08-12,Phone,New Request,12376
+SRQ00000042,42.0,ACC000155,Service Request 42,In Progress,55000.00,High,2022-01-14,2022-09-28,Online,New Request,12377
+SRQ00000043,43.0,ACC000156,Service Request 43,In Progress,30000.00,Medium,2021-12-10,2022-10-15,Website,New Request,12378
+SRQ00000044,44.0,ACC000157,Service Request 44,In Progress,45000.00,High,2021-11-05,2022-11-02,Referral,New Request,12379
+SRQ00000045,45.0,ACC000158,Service Request 45,In Progress,20000.00,Low,2021-10-01,2022-12-20,Other,New Request,12380
+SRQ00000046,46.0,ACC000159,Service Request 46,In Progress,65000.00,High,2021-08-26,2021-01-08,Public Meeting,New Request,12381
+SRQ00000047,47.0,ACC000160,Service Request 47,In Progress,35000.00,Medium,2021-07-21,2021-02-25,Phone,New Request,12382
+SRQ00000048,48.0,ACC000161,Service Request 48,In Progress,50000.00,High,2021-06-16,2021-03-15,Online,New Request,12383
+SRQ00000049,49.0,ACC000162,Service Request 49,In Progress,30000.00,Medium,2021-05-11,2021-04-22,Website,New Request,12384
+SRQ00000050,50.0,ACC000163,Service Request 50,In Progress,60000.00,High,2021-04-06,2021-05-30,Referral,New Request,12385
