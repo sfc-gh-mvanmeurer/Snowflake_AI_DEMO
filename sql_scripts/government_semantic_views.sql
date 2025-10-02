@@ -1,6 +1,21 @@
 -- ========================================================================
--- Snowflake AI Demo - Government Semantic Views for Cortex Analyst
--- Creates government-specific semantic views for natural language queries
+-- Snowflake AI Demo - Government Semantic Views (Step 2 of 4)
+--
+-- DESCRIPTION:
+-- Creates semantic views that enable natural language queries via Cortex Analyst.
+-- These views define the business logic and relationships for government domains:
+-- - Budget & Finance: Financial transactions and budget analysis
+-- - Citizen Services: Service delivery and citizen engagement
+-- - Public Communications: Campaign performance and outreach
+-- - Human Resources: Employee data and workforce analytics
+--
+-- PREREQUISITES:
+-- - government_demo_setup.sql must be completed successfully
+-- - All tables must be populated with data
+--
+-- EXECUTION TIME: ~2-3 minutes
+--
+-- NEXT STEPS: After completion, run government_cortex_search_setup.sql
 -- ========================================================================
 USE ROLE SF_Intelligence_Demo;
 USE DATABASE SPRINGFIELD_GOV;

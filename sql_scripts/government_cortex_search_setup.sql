@@ -1,6 +1,25 @@
 -- ========================================================================
--- Snowflake AI Demo - Government Cortex Search Setup
--- Creates Cortex Search services for unstructured government documents
+-- Snowflake AI Demo - Government Cortex Search Setup (Step 3 of 4)
+--
+-- DESCRIPTION:
+-- Sets up Cortex Search services for intelligent document search across
+-- government policies, procedures, and reports. Creates:
+-- - Document storage tables (DOCUMENT_METADATA, DOCUMENT_CONTENT)
+-- - Government document content from unstructured_docs folder
+-- - Domain-specific search services for Budget, HR, Services, and Communications
+--
+-- CAPABILITIES:
+-- - Vector search across government documents
+-- - Department-specific document filtering
+-- - Semantic search for policy and procedure discovery
+--
+-- PREREQUISITES:
+-- - government_semantic_views.sql must be completed successfully
+-- - Cortex Search must be enabled in your Snowflake account
+--
+-- EXECUTION TIME: ~3-5 minutes
+--
+-- NEXT STEPS: After completion, run government_agent_setup.sql
 -- ========================================================================
 
 USE ROLE SF_Intelligence_Demo;

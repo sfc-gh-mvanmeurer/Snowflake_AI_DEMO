@@ -1,11 +1,32 @@
 -- ========================================================================
--- Snowflake AI Demo - Government Setup Script
--- This script creates the database, schema, tables, and loads all data
--- Repository: https://github.com/sfc-gh-mvanmeurer/Snowflake_AI_DEMO.git
+-- Snowflake AI Demo - Government Setup Script (Step 1 of 4)
+-- 
+-- DESCRIPTION:
+-- This script creates the complete database infrastructure for the Springfield
+-- City Government Snowflake Intelligence demo including:
+-- - Roles and permissions
+-- - Warehouse configuration  
+-- - Database and schema setup
+-- - Git integration for automated data loading
+-- - All dimension and fact tables
+-- - Data loading from GitHub repository
+--
+-- PREREQUISITES:
+-- - Snowflake account with Intelligence capabilities enabled
+-- - ACCOUNTADMIN privileges for initial setup
+-- - Access to GitHub repository: https://github.com/sfc-gh-mvanmeurer/Snowflake_AI_DEMO.git
+--
+-- EXECUTION TIME: ~5-10 minutes
+-- 
+-- NEXT STEPS: After completion, run government_semantic_views.sql
 -- ========================================================================
 
 -- Switch to accountadmin role to create warehouse
 USE ROLE accountadmin;
+
+-- ========================================================================
+-- SECTION 1: SNOWFLAKE INTELLIGENCE SETUP
+-- ========================================================================
 
 -- Enable Snowflake Intelligence by creating the Config DB & Schema
 -- CREATE DATABASE IF NOT EXISTS snowflake_intelligence;
@@ -39,6 +60,10 @@ ALTER USER IDENTIFIER($current_user_name) SET DEFAULT_WAREHOUSE = SNOW_INTELLIGE
 -- Switch to SF_Intelligence_Demo role to create demo objects
 use role SF_Intelligence_Demo;
 
+-- ========================================================================
+-- SECTION 2: DATABASE AND SCHEMA CREATION
+-- ========================================================================
+
 -- Create database and schema
 CREATE OR REPLACE DATABASE SPRINGFIELD_GOV;
 USE DATABASE SPRINGFIELD_GOV;
@@ -60,6 +85,10 @@ CREATE OR REPLACE FILE FORMAT CSV_FORMAT
     DATE_FORMAT = 'YYYY-MM-DD'
     TIMESTAMP_FORMAT = 'YYYY-MM-DD HH24:MI:SS'
     NULL_IF = ('NULL', 'null', '', 'N/A', 'n/a');
+
+-- ========================================================================
+-- SECTION 3: GIT INTEGRATION FOR AUTOMATED DATA LOADING
+-- ========================================================================
 
 use role accountadmin;
 -- Create API Integration for GitHub (public repository access)

@@ -1,6 +1,28 @@
 -- ========================================================================
--- Snowflake AI Demo - Government Agent Setup
--- Creates government-focused Snowflake Intelligence Agent
+-- Snowflake AI Demo - Government Agent Setup (Step 4 of 4)
+--
+-- DESCRIPTION:
+-- Creates the Government_City_County_Agent - a comprehensive AI agent that
+-- orchestrates between Cortex Analyst (Text-to-SQL), Cortex Search (document search),
+-- and external tools for complete government analytics.
+--
+-- AGENT CAPABILITIES:
+-- - Natural language queries across all government domains
+-- - Document search and policy research
+-- - Web scraping for external data analysis
+-- - Email notifications and reporting
+-- - File access with presigned URLs
+-- - Progressive drill-down analysis from high-level to actionable insights
+--
+-- PREREQUISITES:
+-- - government_cortex_search_setup.sql must be completed successfully
+-- - All semantic views and search services must be operational
+-- - Snowflake Intelligence must be enabled
+--
+-- EXECUTION TIME: ~2-3 minutes
+--
+-- COMPLETION: After this script, your demo is ready! 
+-- Access the agent in Snowflake Intelligence UI and start asking questions.
 -- ========================================================================
 
 -- Use SF_Intelligence_Demo role to create procedures and functions first
