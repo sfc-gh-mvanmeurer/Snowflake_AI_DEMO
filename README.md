@@ -61,43 +61,40 @@ The platform integrates multiple Snowflake Intelligence services to provide comp
 
 ---
 
-## 🚀 **Quick Setup**
+## 🚀 **Getting Started**
 
 ### **Prerequisites**
 - Snowflake account with Intelligence capabilities enabled
 - `ACCOUNTADMIN` privileges for initial setup
-- Access to this GitHub repository
+- GitHub repository access for data loading
 
-### **4-Step Installation**
+### **Quick Setup**
 
-Execute the SQL scripts in **exact order** in Snowflake Snowsight:
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/sfc-gh-mvanmeurer/Snowflake_AI_DEMO.git
+   cd Snowflake_AI_DEMO
+   ```
 
-```sql
--- Step 1: Database Infrastructure (5-10 minutes)
--- Creates roles, warehouse, database, tables, and loads all data from GitHub
-@sql_scripts/government_demo_setup.sql
+2. **Run Setup Scripts** (in order)
+   ```sql
+   -- 1. Create database, tables, and load data
+   @sql_scripts/government_demo_setup.sql
+   
+   -- 2. Create semantic views for natural language queries
+   @sql_scripts/government_semantic_views.sql
+   
+   -- 3. Set up document search services
+   @sql_scripts/government_cortex_search_setup.sql
+   
+   -- 4. Configure the AI agent
+   @sql_scripts/government_agent_setup.sql
+   ```
 
--- Step 2: Semantic Views (2-3 minutes)  
--- Enables natural language queries via Cortex Analyst
-@sql_scripts/government_semantic_views.sql
-
--- Step 3: Document Search (3-5 minutes)
--- Sets up Cortex Search for government documents
-@sql_scripts/government_cortex_search_setup.sql
-
--- Step 4: AI Agent (2-3 minutes)
--- Creates the Government_City_County_Agent with full orchestration
-@sql_scripts/government_agent_setup.sql
-```
-
-### **🎉 Start Using the Demo**
-1. Navigate to **Snowflake Intelligence** in Snowsight
-2. Find **"Government_City_County_Agent"** 
-3. Start asking questions like:
-   - *"What are our monthly budget expenditures for the last 12 months?"*
-   - *"Which district has the highest service delivery costs and why?"*
-
-**Total Setup Time: ~15 minutes** ⏱️
+3. **Access the Agent**
+   - Navigate to Snowflake Intelligence in Snowsight
+   - Find "Government_City_County_Agent" 
+   - Start asking questions!
 
 ---
 
