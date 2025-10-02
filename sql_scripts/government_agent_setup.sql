@@ -3,7 +3,11 @@
 -- Creates government-focused Snowflake Intelligence Agent
 -- ========================================================================
 
+-- Use SF_Intelligence_Demo role to create procedures and functions first
 USE ROLE SF_Intelligence_Demo;
+USE DATABASE SPRINGFIELD_GOV;
+USE SCHEMA DEMO;
+USE WAREHOUSE SNOW_INTELLIGENCE_DEMO_WH;
 
 -- Create stored procedure to generate presigned URLs for files in internal stages
 CREATE OR REPLACE PROCEDURE Get_File_Presigned_URL_SP(
@@ -20,7 +24,7 @@ DECLARE
     presigned_url STRING;
     sql_stmt STRING;
     expiration_seconds INTEGER;
-    stage_name STRING DEFAULT '@SF_AI_DEMO.DEMO_SCHEMA.INTERNAL_DATA_STAGE';
+    stage_name STRING DEFAULT '@SPRINGFIELD_GOV.DEMO.INTERNAL_DATA_STAGE';
 BEGIN
     expiration_seconds := EXPIRATION_MINS * 60;
 
@@ -62,7 +66,7 @@ RETURNS STRING
 LANGUAGE PYTHON
 RUNTIME_VERSION = 3.11
 HANDLER = 'get_page'
-EXTERNAL_ACCESS_INTEGRATIONS = (Snowflake_intelligence_ExternalAccess_Integration)
+EXTERNAL_ACCESS_INTEGRATIONS = ()
 PACKAGES = ('requests', 'beautifulsoup4')
 AS
 $$
@@ -76,6 +80,21 @@ def get_page(weburl):
   soup = BeautifulSoup(response.text)
   return soup.get_text()
 $$;
+
+-- Grant ACCOUNTADMIN access to the schema and objects before agent creation
+USE ROLE SF_Intelligence_Demo;
+GRANT USAGE ON DATABASE SPRINGFIELD_GOV TO ROLE ACCOUNTADMIN;
+GRANT USAGE ON SCHEMA SPRINGFIELD_GOV.DEMO TO ROLE ACCOUNTADMIN;
+GRANT USAGE ON WAREHOUSE SNOW_INTELLIGENCE_DEMO_WH TO ROLE ACCOUNTADMIN;
+GRANT SELECT ON ALL TABLES IN SCHEMA SPRINGFIELD_GOV.DEMO TO ROLE ACCOUNTADMIN;
+GRANT USAGE ON ALL FUNCTIONS IN SCHEMA SPRINGFIELD_GOV.DEMO TO ROLE ACCOUNTADMIN;
+GRANT USAGE ON ALL PROCEDURES IN SCHEMA SPRINGFIELD_GOV.DEMO TO ROLE ACCOUNTADMIN;
+
+-- Now switch to ACCOUNTADMIN to create the agent in the system schema
+USE ROLE ACCOUNTADMIN;
+USE DATABASE SPRINGFIELD_GOV;
+USE SCHEMA DEMO;
+USE WAREHOUSE SNOW_INTELLIGENCE_DEMO_WH;
 
 -- Create government-focused Snowflake Intelligence Agent
 CREATE OR REPLACE AGENT SNOWFLAKE_INTELLIGENCE.AGENTS.Government_City_County_Agent
@@ -101,6 +120,39 @@ FROM SPECIFICATION $$
       },
       {
         "question": "What's our employee headcount by department?"
+      },
+      {
+        "question": "Show me our service delivery performance trends across all districts over the past 2 years"
+      },
+      {
+        "question": "Which contractors have the highest spending and what services do they provide?"
+      },
+      {
+        "question": "What are the top 5 most requested citizen services and their completion rates?"
+      },
+      {
+        "question": "Find information about our procurement policies and budget allocation procedures"
+      },
+      {
+        "question": "Compare our employee salaries by department and identify any retention risks based on attrition data"
+      },
+      {
+        "question": "Which district has the highest service delivery costs and why?"
+      },
+      {
+        "question": "Show me the detailed breakdown of service costs in District 3 - Westside by service category"
+      },
+      {
+        "question": "What specific services are driving up costs in District 3 and which contractors are involved?"
+      },
+      {
+        "question": "Find policy documents related to infrastructure services and contractor management in our westside operations"
+      },
+      {
+        "question": "Which employees in District 3 handle the most expensive service requests and what are their performance metrics?"
+      },
+      {
+        "question": "Create an action plan to optimize service delivery costs in District 3 based on historical data and policy guidelines"
       }
     ]
   },
@@ -241,44 +293,44 @@ FROM SPECIFICATION $$
         "type": "warehouse",
         "warehouse": "SNOW_INTELLIGENCE_DEMO_WH"
       },
-      "identifier": "SF_AI_DEMO.DEMO_SCHEMA.GET_FILE_PRESIGNED_URL_SP",
+      "identifier": "SPRINGFIELD_GOV.DEMO.GET_FILE_PRESIGNED_URL_SP",
       "name": "GET_FILE_PRESIGNED_URL_SP(VARCHAR, DEFAULT NUMBER)",
       "type": "procedure"
     },
     "Query Budget & Finance Datamart": {
-      "semantic_view": "SF_AI_DEMO.DEMO_SCHEMA.BUDGET_FINANCE_SEMANTIC_VIEW"
+      "semantic_view": "SPRINGFIELD_GOV.DEMO.BUDGET_FINANCE_SEMANTIC_VIEW"
     },
     "Query HR Datamart": {
-      "semantic_view": "SF_AI_DEMO.DEMO_SCHEMA.HUMAN_RESOURCES_SEMANTIC_VIEW"
+      "semantic_view": "SPRINGFIELD_GOV.DEMO.HUMAN_RESOURCES_SEMANTIC_VIEW"
     },
     "Query Public Communications Datamart": {
-      "semantic_view": "SF_AI_DEMO.DEMO_SCHEMA.PUBLIC_COMMUNICATIONS_SEMANTIC_VIEW"
+      "semantic_view": "SPRINGFIELD_GOV.DEMO.PUBLIC_COMMUNICATIONS_SEMANTIC_VIEW"
     },
     "Query Citizen Services Datamart": {
-      "semantic_view": "SF_AI_DEMO.DEMO_SCHEMA.CITIZEN_SERVICES_SEMANTIC_VIEW"
+      "semantic_view": "SPRINGFIELD_GOV.DEMO.CITIZEN_SERVICES_SEMANTIC_VIEW"
     },
     "Search Government Documents: Budget & Finance": {
       "id_column": "FILE_URL",
       "max_results": 5,
-      "name": "SF_AI_DEMO.DEMO_SCHEMA.SEARCH_BUDGET_FINANCE_DOCS",
+      "name": "SPRINGFIELD_GOV.DEMO.SEARCH_BUDGET_FINANCE_DOCS",
       "title_column": "TITLE"
     },
     "Search Government Documents: HR": {
       "id_column": "FILE_URL",
       "max_results": 5,
-      "name": "SF_AI_DEMO.DEMO_SCHEMA.SEARCH_HR_DOCS",
+      "name": "SPRINGFIELD_GOV.DEMO.SEARCH_HR_DOCS",
       "title_column": "TITLE"
     },
     "Search Government Documents: Citizen Services": {
       "id_column": "FILE_URL",
       "max_results": 5,
-      "name": "SF_AI_DEMO.DEMO_SCHEMA.SEARCH_CITIZEN_SERVICES_DOCS",
+      "name": "SPRINGFIELD_GOV.DEMO.SEARCH_CITIZEN_SERVICES_DOCS",
       "title_column": "TITLE"
     },
     "Search Government Documents: Public Communications": {
       "id_column": "RELATIVE_PATH",
       "max_results": 5,
-      "name": "SF_AI_DEMO.DEMO_SCHEMA.SEARCH_PUBLIC_COMMUNICATIONS_DOCS",
+      "name": "SPRINGFIELD_GOV.DEMO.SEARCH_PUBLIC_COMMUNICATIONS_DOCS",
       "title_column": "TITLE"
     },
     "Send_Emails": {
@@ -287,7 +339,7 @@ FROM SPECIFICATION $$
         "type": "warehouse",
         "warehouse": "SNOW_INTELLIGENCE_DEMO_WH"
       },
-      "identifier": "SF_AI_DEMO.DEMO_SCHEMA.SEND_MAIL",
+      "identifier": "SPRINGFIELD_GOV.DEMO.SEND_MAIL",
       "name": "SEND_MAIL(VARCHAR, VARCHAR, VARCHAR)",
       "type": "procedure"
     },
@@ -297,10 +349,35 @@ FROM SPECIFICATION $$
         "type": "warehouse",
         "warehouse": "SNOW_INTELLIGENCE_DEMO_WH"
       },
-      "identifier": "SF_AI_DEMO.DEMO_SCHEMA.WEB_SCRAPE",
+      "identifier": "SPRINGFIELD_GOV.DEMO.WEB_SCRAPE",
       "name": "WEB_SCRAPE(VARCHAR)",
       "type": "function"
     }
   }
 }
 $$;
+
+-- ========================================================================
+-- GRANT PERMISSIONS
+-- ========================================================================
+
+-- Grant usage on the agent to the demo role (agent is in system schema)
+GRANT USAGE ON AGENT SNOWFLAKE_INTELLIGENCE.AGENTS.Government_City_County_Agent TO ROLE SF_Intelligence_Demo;
+
+-- Note: Semantic views are accessed through database/schema USAGE permissions
+-- The role already has USAGE on SPRINGFIELD_GOV.DEMO schema
+
+-- Grant permissions on Cortex Search services
+GRANT USAGE ON CORTEX SEARCH SERVICE SPRINGFIELD_GOV.DEMO.SEARCH_BUDGET_FINANCE_DOCS TO ROLE SF_Intelligence_Demo;
+GRANT USAGE ON CORTEX SEARCH SERVICE SPRINGFIELD_GOV.DEMO.SEARCH_HR_DOCS TO ROLE SF_Intelligence_Demo;
+GRANT USAGE ON CORTEX SEARCH SERVICE SPRINGFIELD_GOV.DEMO.SEARCH_CITIZEN_SERVICES_DOCS TO ROLE SF_Intelligence_Demo;
+GRANT USAGE ON CORTEX SEARCH SERVICE SPRINGFIELD_GOV.DEMO.SEARCH_PUBLIC_COMMUNICATIONS_DOCS TO ROLE SF_Intelligence_Demo;
+
+-- Grant permissions on procedures and functions
+GRANT USAGE ON PROCEDURE SPRINGFIELD_GOV.DEMO.GET_FILE_PRESIGNED_URL_SP(VARCHAR, NUMBER) TO ROLE SF_Intelligence_Demo;
+GRANT USAGE ON PROCEDURE SPRINGFIELD_GOV.DEMO.SEND_MAIL(VARCHAR, VARCHAR, VARCHAR) TO ROLE SF_Intelligence_Demo;
+GRANT USAGE ON FUNCTION SPRINGFIELD_GOV.DEMO.WEB_SCRAPE(VARCHAR) TO ROLE SF_Intelligence_Demo;
+
+-- Grant permissions on tables
+GRANT SELECT ON TABLE SPRINGFIELD_GOV.DEMO.DOCUMENT_METADATA TO ROLE SF_Intelligence_Demo;
+GRANT SELECT ON TABLE SPRINGFIELD_GOV.DEMO.DOCUMENT_CONTENT TO ROLE SF_Intelligence_Demo;

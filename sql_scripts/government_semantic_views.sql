@@ -3,14 +3,15 @@
 -- Creates government-specific semantic views for natural language queries
 -- ========================================================================
 USE ROLE SF_Intelligence_Demo;
-USE DATABASE SF_AI_DEMO;
-USE SCHEMA DEMO_SCHEMA;
+USE DATABASE SPRINGFIELD_GOV;
+USE SCHEMA DEMO;
+USE WAREHOUSE SNOW_INTELLIGENCE_DEMO_WH;
 
 -- ========================================================================
 -- BUDGET & FINANCE SEMANTIC VIEW
 -- ========================================================================
 
-CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.BUDGET_FINANCE_SEMANTIC_VIEW
+CREATE OR REPLACE SEMANTIC VIEW SPRINGFIELD_GOV.DEMO.BUDGET_FINANCE_SEMANTIC_VIEW
     TABLES (
         TRANSACTIONS AS BUDGET_TRANSACTIONS PRIMARY KEY (TRANSACTION_ID) WITH SYNONYMS=('budget transactions','financial data','expenditures') COMMENT='All budget transactions across departments',
         ACCOUNTS AS ACCOUNT_DIM PRIMARY KEY (ACCOUNT_KEY) WITH SYNONYMS=('chart of accounts','account types','budget accounts') COMMENT='Account dimension for financial categorization',
@@ -27,13 +28,13 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.BUDGET_FINANCE_SEMANTIC_V
         TRANSACTIONS_TO_CITIZENS AS TRANSACTIONS(CITIZEN_KEY) REFERENCES CITIZENS(CITIZEN_KEY)
     )
     FACTS (
-        TRANSACTIONS.TRANSACTION_AMOUNT AS amount COMMENT='Transaction amount in dollars',
+        TRANSACTIONS.AMOUNT AS amount COMMENT='Transaction amount in dollars',
         TRANSACTIONS.TRANSACTION_RECORD AS 1 COMMENT='Count of transactions'
     )
     DIMENSIONS (
-        TRANSACTIONS.TRANSACTION_DATE AS date WITH SYNONYMS=('date','transaction date','budget date') COMMENT='Date of the budget transaction',
-        TRANSACTIONS.TRANSACTION_MONTH AS MONTH(date) COMMENT='Month of the transaction',
-        TRANSACTIONS.TRANSACTION_YEAR AS YEAR(date) COMMENT='Year of the transaction',
+        TRANSACTIONS.DATE AS date WITH SYNONYMS=('date','transaction date','budget date') COMMENT='Date of the budget transaction',
+        TRANSACTIONS.TRANSACTION_MONTH AS MONTH(TRANSACTIONS.DATE) COMMENT='Month of the transaction',
+        TRANSACTIONS.TRANSACTION_YEAR AS YEAR(TRANSACTIONS.DATE) COMMENT='Year of the transaction',
         ACCOUNTS.ACCOUNT_NAME AS account_name WITH SYNONYMS=('account','account type','budget account') COMMENT='Name of the account',
         ACCOUNTS.ACCOUNT_TYPE AS account_type WITH SYNONYMS=('type','category','account category') COMMENT='Type of account (Income/Expense)',
         DEPARTMENTS.DEPARTMENT_NAME AS department_name WITH SYNONYMS=('department','business unit','city department') COMMENT='Name of the department',
@@ -42,9 +43,9 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.BUDGET_FINANCE_SEMANTIC_V
         CITIZENS.CITIZEN_NAME AS citizen_name WITH SYNONYMS=('citizen','resident','constituent') COMMENT='Name of the citizen'
     )
     METRICS (
-        TRANSACTIONS.AVERAGE_AMOUNT AS AVG(transactions.amount) COMMENT='Average transaction amount',
-        TRANSACTIONS.TOTAL_AMOUNT AS SUM(transactions.amount) COMMENT='Total transaction amount',
-        TRANSACTIONS.TOTAL_TRANSACTIONS AS COUNT(transactions.transaction_record) COMMENT='Total number of transactions'
+        TRANSACTIONS.AVERAGE_AMOUNT AS AVG(TRANSACTIONS.AMOUNT) COMMENT='Average transaction amount',
+        TRANSACTIONS.TOTAL_AMOUNT AS SUM(TRANSACTIONS.AMOUNT) COMMENT='Total transaction amount',
+        TRANSACTIONS.TOTAL_TRANSACTIONS AS COUNT(TRANSACTIONS.TRANSACTION_RECORD) COMMENT='Total number of transactions'
     )
     COMMENT='Semantic view for budget and financial analysis and reporting';
 
@@ -52,7 +53,7 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.BUDGET_FINANCE_SEMANTIC_V
 -- CITIZEN SERVICES SEMANTIC VIEW
 -- ========================================================================
 
-CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.CITIZEN_SERVICES_SEMANTIC_VIEW
+CREATE OR REPLACE SEMANTIC VIEW SPRINGFIELD_GOV.DEMO.CITIZEN_SERVICES_SEMANTIC_VIEW
     TABLES (
         CITIZENS AS CITIZEN_DIM PRIMARY KEY (CITIZEN_KEY) WITH SYNONYMS=('citizens','residents','constituents','accounts') COMMENT='Citizen information for service analysis',
         SERVICES AS SERVICE_DIM PRIMARY KEY (SERVICE_KEY) WITH SYNONYMS=('services','municipal services','city services','programs') COMMENT='Service catalog for service analysis',
@@ -71,42 +72,30 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.CITIZEN_SERVICES_SEMANTIC
         SERVICE_DELIVERY_TO_CONTRACTORS AS SERVICE_DELIVERY(CONTRACTOR_KEY) REFERENCES CONTRACTORS(CONTRACTOR_KEY)
     )
     FACTS (
-        SERVICE_DELIVERY.SERVICE_AMOUNT AS amount COMMENT='Service amount in dollars',
+        SERVICE_DELIVERY.AMOUNT AS amount COMMENT='Service amount in dollars',
         SERVICE_DELIVERY.SERVICE_RECORD AS 1 COMMENT='Count of service transactions',
-        SERVICE_DELIVERY.UNITS_DELIVERED AS units COMMENT='Number of service units delivered'
+        SERVICE_DELIVERY.UNITS AS units COMMENT='Number of service units delivered'
     )
     DIMENSIONS (
-        CITIZENS.CITIZEN_ENTITY_TYPE AS ENTITY_TYPE WITH SYNONYMS=('entity type','citizen type','resident type') COMMENT='Type of citizen entity',
-        CITIZENS.CITIZEN_KEY AS CITIZEN_KEY,
+        CITIZENS.ENTITY_TYPE AS ENTITY_TYPE WITH SYNONYMS=('entity type','citizen type','resident type') COMMENT='Type of citizen entity',
         CITIZENS.CITIZEN_NAME AS citizen_name WITH SYNONYMS=('citizen','resident','constituent','account') COMMENT='Name of the citizen',
-        SERVICES.CATEGORY_KEY AS CATEGORY_KEY WITH SYNONYMS=('category_id','service_category','category_code','classification_key','group_key','service_group_id') COMMENT='Unique identifier for the service category.',
-        SERVICES.SERVICE_KEY AS SERVICE_KEY,
         SERVICES.SERVICE_NAME AS service_name WITH SYNONYMS=('service','municipal service','city service') COMMENT='Name of the service',
-        SERVICE_CATEGORY_DIM.CATEGORY_KEY AS CATEGORY_KEY WITH SYNONYMS=('category_id','category_code','service_category_number','category_identifier','classification_key') COMMENT='Unique identifier for a service category.',
+        SERVICES.VERTICAL AS SERVICE_VERTICAL WITH SYNONYMS=('service vertical','service area') COMMENT='Service area from service dimension',
         SERVICE_CATEGORY_DIM.CATEGORY_NAME AS CATEGORY_NAME WITH SYNONYMS=('category_title','service_group','classification_name','category_label','service_category_description') COMMENT='The category to which a service belongs, such as public safety, infrastructure, or community services.',
-        SERVICE_CATEGORY_DIM.VERTICAL AS VERTICAL WITH SYNONYMS=('vertical','sector','domain','service_area','business_area') COMMENT='The service area in which a service is categorized, such as public safety, infrastructure, or community services.',
-        DISTRICTS.DISTRICT_KEY AS DISTRICT_KEY,
         DISTRICTS.DISTRICT_NAME AS district_name WITH SYNONYMS=('district','ward','area','neighborhood') COMMENT='Name of the district',
-        SERVICE_DELIVERY.CITIZEN_KEY AS CITIZEN_KEY,
-        SERVICE_DELIVERY.SERVICE_KEY AS SERVICE_KEY,
-        SERVICE_DELIVERY.DISTRICT_KEY AS DISTRICT_KEY,
-        SERVICE_DELIVERY.EMPLOYEE_KEY AS EMPLOYEE_KEY,
-        SERVICE_DELIVERY.SERVICE_DATE AS date WITH SYNONYMS=('date','service date','transaction date') COMMENT='Date of the service delivery',
-        SERVICE_DELIVERY.SERVICE_ID AS SERVICE_ID,
-        SERVICE_DELIVERY.SERVICE_MONTH AS MONTH(date) COMMENT='Month of the service',
-        SERVICE_DELIVERY.SERVICE_YEAR AS YEAR(date) COMMENT='Year of the service',
-        SERVICE_DELIVERY.CONTRACTOR_KEY AS CONTRACTOR_KEY,
-        EMPLOYEES.EMPLOYEE_KEY AS EMPLOYEE_KEY,
+        SERVICE_DELIVERY.DATE AS date WITH SYNONYMS=('date','service date','transaction date') COMMENT='Date of the service delivery',
+        SERVICE_DELIVERY.SERVICE_MONTH AS MONTH(SERVICE_DELIVERY.DATE) COMMENT='Month of the service',
+        SERVICE_DELIVERY.SERVICE_YEAR AS YEAR(SERVICE_DELIVERY.DATE) COMMENT='Year of the service',
         EMPLOYEES.EMPLOYEE_NAME AS EMPLOYEE_NAME WITH SYNONYMS=('employee','city employee','staff member','worker') COMMENT='Name of the city employee',
-        CONTRACTORS.CONTRACTOR_KEY AS CONTRACTOR_KEY,
         CONTRACTORS.CONTRACTOR_NAME AS contractor_name WITH SYNONYMS=('contractor','vendor','supplier','provider') COMMENT='Name of the contractor'
     )
     METRICS (
-        SERVICE_DELIVERY.AVERAGE_SERVICE_AMOUNT AS AVG(service_delivery.amount) COMMENT='Average service amount',
-        SERVICE_DELIVERY.AVERAGE_UNITS_PER_SERVICE AS AVG(service_delivery.units) COMMENT='Average units per service',
-        SERVICE_DELIVERY.TOTAL_SERVICES AS COUNT(service_delivery.service_record) COMMENT='Total number of services delivered',
-        SERVICE_DELIVERY.TOTAL_SERVICE_AMOUNT AS SUM(service_delivery.amount) COMMENT='Total service amount',
-        SERVICE_DELIVERY.TOTAL_UNITS AS SUM(service_delivery.units) COMMENT='Total service units delivered'
+        SERVICE_DELIVERY.AVERAGE_SERVICE_AMOUNT AS AVG(SERVICE_DELIVERY.AMOUNT) COMMENT='Average service amount',
+        SERVICE_DELIVERY.AVERAGE_UNITS_PER_SERVICE AS AVG(SERVICE_DELIVERY.UNITS) COMMENT='Average units per service',
+        SERVICE_DELIVERY.TOTAL_SERVICES AS COUNT(SERVICE_DELIVERY.SERVICE_RECORD) COMMENT='Total number of services delivered',
+        SERVICE_DELIVERY.TOTAL_SERVICE_AMOUNT AS SUM(SERVICE_DELIVERY.AMOUNT) COMMENT='Total service amount',
+        SERVICE_DELIVERY.TOTAL_UNITS AS SUM(SERVICE_DELIVERY.UNITS) COMMENT='Total service units delivered',
+        SERVICE_DELIVERY.COMPLETED_SERVICES AS COUNT(SERVICE_DELIVERY.SERVICE_RECORD) COMMENT='All services are considered completed when recorded'
     )
     COMMENT='Semantic view for citizen services analysis and performance tracking';
 
@@ -114,7 +103,7 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.CITIZEN_SERVICES_SEMANTIC
 -- PUBLIC COMMUNICATIONS SEMANTIC VIEW
 -- ========================================================================
 
-CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.PUBLIC_COMMUNICATIONS_SEMANTIC_VIEW
+CREATE OR REPLACE SEMANTIC VIEW SPRINGFIELD_GOV.DEMO.PUBLIC_COMMUNICATIONS_SEMANTIC_VIEW
     TABLES (
         ACCOUNTS AS GOVERNMENT_ACCOUNTS PRIMARY KEY (ACCOUNT_ID) WITH SYNONYMS=('citizens','accounts','constituents') COMMENT='Citizen account information for communication analysis',
         COMMUNICATIONS AS PUBLIC_COMMUNICATION_FACT PRIMARY KEY (COMMUNICATION_FACT_ID) WITH SYNONYMS=('public communications','communication campaigns','outreach') COMMENT='Public communication campaign data',
@@ -136,69 +125,49 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.PUBLIC_COMMUNICATIONS_SEM
         SERVICE_REQUESTS_TO_COMMUNICATIONS AS SERVICE_REQUESTS(COMMUNICATION_ID) REFERENCES COMMUNICATIONS(COMMUNICATION_FACT_ID)
     )
     FACTS (
-        PUBLIC COMMUNICATIONS.COMMUNICATION_RECORD AS 1 COMMENT='Count of communication activities',
-        PUBLIC COMMUNICATIONS.COMMUNICATION_SPEND AS spend COMMENT='Communication spend in dollars',
-        PUBLIC COMMUNICATIONS.IMPRESSIONS AS IMPRESSIONS COMMENT='Number of impressions',
-        PUBLIC COMMUNICATIONS.PARTICIPANTS_GENERATED AS PARTICIPANTS_GENERATED COMMENT='Number of participants generated',
-        PUBLIC CONTACTS.CONTACT_RECORD AS 1 COMMENT='Count of contacts generated',
-        PUBLIC SERVICE_REQUESTS.SERVICE_REQUEST_RECORD AS 1 COMMENT='Count of service requests created',
-        PUBLIC SERVICE_REQUESTS.SERVICE_REQUEST_AMOUNT AS AMOUNT COMMENT='Service request amount in dollars'
+        COMMUNICATIONS.COMMUNICATION_RECORD AS 1 COMMENT='Count of communication activities',
+        COMMUNICATIONS.SPEND AS spend COMMENT='Communication spend in dollars',
+        COMMUNICATIONS.IMPRESSIONS AS impressions COMMENT='Number of impressions',
+        COMMUNICATIONS.PARTICIPANTS_GENERATED AS participants_generated COMMENT='Number of participants generated',
+        CONTACTS.CONTACT_RECORD AS 1 COMMENT='Count of contacts generated',
+        SERVICE_REQUESTS.SERVICE_REQUEST_RECORD AS 1 COMMENT='Count of service requests created',
+        SERVICE_REQUESTS.SERVICE_REQUEST_AMOUNT AS amount COMMENT='Service request amount in dollars'
     )
     DIMENSIONS (
-        PUBLIC ACCOUNTS.ACCOUNT_ID AS ACCOUNT_ID,
-        PUBLIC ACCOUNTS.ACCOUNT_NAME AS ACCOUNT_NAME WITH SYNONYMS=('citizen name','resident name','constituent name','company') COMMENT='Name of the citizen account',
-        PUBLIC ACCOUNTS.ACCOUNT_TYPE AS ACCOUNT_TYPE WITH SYNONYMS=('citizen type','account category','entity type') COMMENT='Type of citizen account',
-        PUBLIC ACCOUNTS.ANNUAL_REVENUE AS ANNUAL_REVENUE WITH SYNONYMS=('citizen revenue','constituent revenue') COMMENT='Citizen annual revenue',
-        PUBLIC ACCOUNTS.EMPLOYEES AS EMPLOYEES WITH SYNONYMS=('entity size','employee count') COMMENT='Number of employees at citizen entity',
-        PUBLIC ACCOUNTS.ENTITY_TYPE AS ENTITY_TYPE WITH SYNONYMS=('entity type','citizen type') COMMENT='Type of citizen entity',
-        PUBLIC COMMUNICATIONS.COMMUNICATION_DATE AS date WITH SYNONYMS=('date','communication date') COMMENT='Date of the communication activity',
-        PUBLIC COMMUNICATIONS.COMMUNICATION_FACT_ID AS COMMUNICATION_FACT_ID,
-        PUBLIC COMMUNICATIONS.COMMUNICATION_KEY AS COMMUNICATION_KEY,
-        PUBLIC COMMUNICATIONS.COMMUNICATION_MONTH AS MONTH(date) COMMENT='Month of the communication',
-        PUBLIC COMMUNICATIONS.COMMUNICATION_YEAR AS YEAR(date) COMMENT='Year of the communication',
-        PUBLIC COMMUNICATIONS.CHANNEL_KEY AS CHANNEL_KEY,
-        PUBLIC COMMUNICATIONS.SERVICE_KEY AS SERVICE_KEY WITH SYNONYMS=('service_id','service identifier') COMMENT='Service identifier for communication targeting',
-        PUBLIC COMMUNICATIONS.DISTRICT_KEY AS DISTRICT_KEY,
-        PUBLIC COMMUNICATION_DETAILS.COMMUNICATION_KEY AS COMMUNICATION_KEY,
-        PUBLIC COMMUNICATION_DETAILS.COMMUNICATION_NAME AS COMMUNICATION_NAME WITH SYNONYMS=('communication','communication title') COMMENT='Name of the public communication',
-        PUBLIC COMMUNICATION_DETAILS.COMMUNICATION_OBJECTIVE AS OBJECTIVE WITH SYNONYMS=('objective','goal','purpose') COMMENT='Communication objective',
-        PUBLIC CHANNELS.CHANNEL_KEY AS CHANNEL_KEY,
-        PUBLIC CHANNELS.CHANNEL_NAME AS CHANNEL_NAME WITH SYNONYMS=('channel','communication channel','media') COMMENT='Name of the communication channel',
-        PUBLIC CONTACTS.ACCOUNT_ID AS ACCOUNT_ID,
-        PUBLIC CONTACTS.COMMUNICATION_NO AS COMMUNICATION_NO,
-        PUBLIC CONTACTS.CONTACT_ID AS CONTACT_ID,
-        PUBLIC CONTACTS.DEPARTMENT AS DEPARTMENT WITH SYNONYMS=('department','business unit') COMMENT='Contact department',
-        PUBLIC CONTACTS.EMAIL AS EMAIL WITH SYNONYMS=('email','email address') COMMENT='Contact email address',
-        PUBLIC CONTACTS.FIRST_NAME AS FIRST_NAME WITH SYNONYMS=('first name','contact name') COMMENT='Contact first name',
-        PUBLIC CONTACTS.LAST_NAME AS LAST_NAME WITH SYNONYMS=('last name','surname') COMMENT='Contact last name',
-        PUBLIC CONTACTS.REQUEST_SOURCE AS REQUEST_SOURCE WITH SYNONYMS=('request source','source') COMMENT='How the contact was generated',
-        PUBLIC CONTACTS.TITLE AS TITLE WITH SYNONYMS=('job title','position') COMMENT='Contact job title',
-        PUBLIC SERVICE_REQUESTS.ACCOUNT_ID AS ACCOUNT_ID,
-        PUBLIC SERVICE_REQUESTS.COMMUNICATION_ID AS COMMUNICATION_ID WITH SYNONYMS=('communication fact id','communication campaign id') COMMENT='Communication fact ID that links service request to communication',
-        PUBLIC SERVICE_REQUESTS.CLOSE_DATE AS CLOSE_DATE WITH SYNONYMS=('close date','completion date') COMMENT='Expected or actual close date',
-        PUBLIC SERVICE_REQUESTS.SERVICE_REQUEST_ID AS SERVICE_REQUEST_ID,
-        PUBLIC SERVICE_REQUESTS.SERVICE_REQUEST_SOURCE AS request_source WITH SYNONYMS=('service request source','request source') COMMENT='Source of the service request',
-        PUBLIC SERVICE_REQUESTS.SERVICE_REQUEST_NAME AS SERVICE_REQUEST_NAME WITH SYNONYMS=('request name','service request title') COMMENT='Name of the service request',
-        PUBLIC SERVICE_REQUESTS.SERVICE_REQUEST_STATUS AS STATUS COMMENT='Status of the service request',
-        PUBLIC SERVICE_REQUESTS.SERVICE_REQUEST_TYPE AS TYPE WITH SYNONYMS=('request type','service request type') COMMENT='Type of service request',
-        PUBLIC SERVICES.SERVICE_CATEGORY AS CATEGORY_NAME WITH SYNONYMS=('category','service category') COMMENT='Category of the service',
-        PUBLIC SERVICES.SERVICE_KEY AS SERVICE_KEY,
-        PUBLIC SERVICES.SERVICE_NAME AS SERVICE_NAME WITH SYNONYMS=('service','municipal service','service title') COMMENT='Name of the service being promoted',
-        PUBLIC SERVICES.SERVICE_VERTICAL AS VERTICAL WITH SYNONYMS=('vertical','sector') COMMENT='Service area of the service',
-        PUBLIC DISTRICTS.DISTRICT_KEY AS DISTRICT_KEY,
-        PUBLIC DISTRICTS.DISTRICT_NAME AS DISTRICT_NAME WITH SYNONYMS=('district','ward','area','neighborhood') COMMENT='Name of the district'
+        ACCOUNTS.ACCOUNT_NAME AS ACCOUNT_NAME WITH SYNONYMS=('citizen name','resident name','constituent name','company') COMMENT='Name of the citizen account',
+        ACCOUNTS.ACCOUNT_TYPE AS ACCOUNT_TYPE WITH SYNONYMS=('citizen type','account category','entity type') COMMENT='Type of citizen account',
+        ACCOUNTS.ENTITY_TYPE AS ENTITY_TYPE WITH SYNONYMS=('entity type','citizen type') COMMENT='Type of citizen entity',
+        COMMUNICATIONS.DATE AS date WITH SYNONYMS=('date','communication date') COMMENT='Date of the communication activity',
+        COMMUNICATIONS.COMMUNICATION_MONTH AS MONTH(COMMUNICATIONS.DATE) COMMENT='Month of the communication',
+        COMMUNICATIONS.COMMUNICATION_YEAR AS YEAR(COMMUNICATIONS.DATE) COMMENT='Year of the communication',
+        COMMUNICATION_DETAILS.COMMUNICATION_NAME AS COMMUNICATION_NAME WITH SYNONYMS=('communication','communication title') COMMENT='Name of the public communication',
+        COMMUNICATION_DETAILS.COMMUNICATION_OBJECTIVE AS OBJECTIVE WITH SYNONYMS=('objective','goal','purpose') COMMENT='Communication objective',
+        CHANNELS.CHANNEL_NAME AS CHANNEL_NAME WITH SYNONYMS=('channel','communication channel','media') COMMENT='Name of the communication channel',
+        CONTACTS.DEPARTMENT AS DEPARTMENT WITH SYNONYMS=('department','business unit') COMMENT='Contact department',
+        CONTACTS.EMAIL AS EMAIL WITH SYNONYMS=('email','email address') COMMENT='Contact email address',
+        CONTACTS.FIRST_NAME AS FIRST_NAME WITH SYNONYMS=('first name','contact name') COMMENT='Contact first name',
+        CONTACTS.LAST_NAME AS LAST_NAME WITH SYNONYMS=('last name','surname') COMMENT='Contact last name',
+        CONTACTS.REQUEST_SOURCE AS REQUEST_SOURCE WITH SYNONYMS=('request source','source') COMMENT='How the contact was generated',
+        CONTACTS.TITLE AS TITLE WITH SYNONYMS=('job title','position') COMMENT='Contact job title',
+        SERVICE_REQUESTS.CLOSE_DATE AS CLOSE_DATE WITH SYNONYMS=('close date','completion date') COMMENT='Expected or actual close date',
+        SERVICE_REQUESTS.SERVICE_REQUEST_SOURCE AS request_source WITH SYNONYMS=('service request source','request source') COMMENT='Source of the service request',
+        SERVICE_REQUESTS.SERVICE_REQUEST_NAME AS SERVICE_REQUEST_NAME WITH SYNONYMS=('request name','service request title') COMMENT='Name of the service request',
+        SERVICE_REQUESTS.SERVICE_REQUEST_STATUS AS status WITH SYNONYMS=('status','request status','completion status') COMMENT='Status of the service request',
+        SERVICE_REQUESTS.SERVICE_REQUEST_TYPE AS type WITH SYNONYMS=('request type','service request type') COMMENT='Type of service request',
+        SERVICES.SERVICE_NAME AS SERVICE_NAME WITH SYNONYMS=('service','municipal service','service title') COMMENT='Name of the service being promoted',
+        DISTRICTS.DISTRICT_NAME AS DISTRICT_NAME WITH SYNONYMS=('district','ward','area','neighborhood') COMMENT='Name of the district'
     )
     METRICS (
-        PUBLIC COMMUNICATIONS.AVERAGE_SPEND AS AVG(COMMUNICATIONS.spend) COMMENT='Average communication spend',
-        PUBLIC COMMUNICATIONS.TOTAL_COMMUNICATIONS AS COUNT(COMMUNICATIONS.communication_record) COMMENT='Total number of communication activities',
-        PUBLIC COMMUNICATIONS.TOTAL_IMPRESSIONS AS SUM(COMMUNICATIONS.impressions) COMMENT='Total impressions across communications',
-        PUBLIC COMMUNICATIONS.TOTAL_PARTICIPANTS AS SUM(COMMUNICATIONS.participants_generated) COMMENT='Total participants generated from communications',
-        PUBLIC COMMUNICATIONS.TOTAL_SPEND AS SUM(COMMUNICATIONS.spend) COMMENT='Total communication spend',
-        PUBLIC CONTACTS.TOTAL_CONTACTS AS COUNT(CONTACTS.contact_record) COMMENT='Total contacts generated from communications',
-        PUBLIC SERVICE_REQUESTS.AVERAGE_REQUEST_AMOUNT AS AVG(SERVICE_REQUESTS.service_request_amount) COMMENT='Average service request amount',
-        PUBLIC SERVICE_REQUESTS.COMPLETED_REQUESTS AS SUM(CASE WHEN SERVICE_REQUESTS.status = 'Completed' THEN SERVICE_REQUESTS.service_request_record ELSE 0 END) COMMENT='Completed service requests',
-        PUBLIC SERVICE_REQUESTS.TOTAL_REQUESTS AS COUNT(SERVICE_REQUESTS.service_request_record) COMMENT='Total service requests from communications',
-        PUBLIC SERVICE_REQUESTS.TOTAL_REQUEST_AMOUNT AS SUM(SERVICE_REQUESTS.service_request_amount) COMMENT='Total amount from service requests'
+        COMMUNICATIONS.AVERAGE_SPEND AS AVG(COMMUNICATIONS.SPEND) COMMENT='Average communication spend',
+        COMMUNICATIONS.TOTAL_COMMUNICATIONS AS COUNT(COMMUNICATIONS.COMMUNICATION_RECORD) COMMENT='Total number of communication activities',
+        COMMUNICATIONS.TOTAL_IMPRESSIONS AS SUM(COMMUNICATIONS.IMPRESSIONS) COMMENT='Total impressions across communications',
+        COMMUNICATIONS.TOTAL_PARTICIPANTS AS SUM(COMMUNICATIONS.PARTICIPANTS_GENERATED) COMMENT='Total participants generated from communications',
+        COMMUNICATIONS.TOTAL_SPEND AS SUM(COMMUNICATIONS.SPEND) COMMENT='Total communication spend',
+        CONTACTS.TOTAL_CONTACTS AS COUNT(CONTACTS.CONTACT_RECORD) COMMENT='Total contacts generated from communications',
+        SERVICE_REQUESTS.AVERAGE_REQUEST_AMOUNT AS AVG(SERVICE_REQUESTS.SERVICE_REQUEST_AMOUNT) COMMENT='Average service request amount',
+        SERVICE_REQUESTS.COMPLETED_REQUESTS AS SUM(CASE WHEN SERVICE_REQUESTS.SERVICE_REQUEST_STATUS = 'Completed' THEN SERVICE_REQUESTS.SERVICE_REQUEST_RECORD ELSE 0 END) COMMENT='Completed service requests',
+        SERVICE_REQUESTS.TOTAL_REQUESTS AS COUNT(SERVICE_REQUESTS.SERVICE_REQUEST_RECORD) COMMENT='Total service requests from communications',
+        SERVICE_REQUESTS.TOTAL_REQUEST_AMOUNT AS SUM(SERVICE_REQUESTS.SERVICE_REQUEST_AMOUNT) COMMENT='Total amount from service requests'
     )
     COMMENT='Enhanced semantic view for public communications analysis with complete service request attribution and ROI tracking';
 
@@ -206,7 +175,7 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.PUBLIC_COMMUNICATIONS_SEM
 -- HUMAN RESOURCES SEMANTIC VIEW
 -- ========================================================================
 
-CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.HUMAN_RESOURCES_SEMANTIC_VIEW
+CREATE OR REPLACE SEMANTIC VIEW SPRINGFIELD_GOV.DEMO.HUMAN_RESOURCES_SEMANTIC_VIEW
     TABLES (
         DEPARTMENTS AS DEPARTMENT_DIM PRIMARY KEY (DEPARTMENT_KEY) WITH SYNONYMS=('departments','business units','city departments') COMMENT='Department dimension for organizational analysis',
         EMPLOYEES AS CITY_EMPLOYEE_DIM PRIMARY KEY (EMPLOYEE_KEY) WITH SYNONYMS=('employees','city employees','staff','workforce') COMMENT='Employee dimension with personal information',
@@ -223,7 +192,7 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.HUMAN_RESOURCES_SEMANTIC_
     FACTS (
         HR_RECORDS.ATTRITION_FLAG AS attrition_flag WITH SYNONYMS=('turnover_indicator','employee_departure_flag','separation_flag','employee_retention_status','churn_status','employee_exit_indicator') COMMENT='Attrition flag. value is 0 if employee is currently active. 1 if employee quit & left the company. Always filter by 0 to show active employees unless specified otherwise',
         HR_RECORDS.EMPLOYEE_RECORD AS 1 COMMENT='Count of employee records',
-        HR_RECORDS.EMPLOYEE_SALARY AS salary COMMENT='Employee salary in dollars'
+        HR_RECORDS.SALARY AS salary COMMENT='Employee salary in dollars'
     )
     DIMENSIONS (
         DEPARTMENTS.DEPARTMENT_KEY AS DEPARTMENT_KEY,
@@ -237,9 +206,9 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.HUMAN_RESOURCES_SEMANTIC_
         HR_RECORDS.HR_FACT_ID AS HR_FACT_ID,
         HR_RECORDS.JOB_KEY AS JOB_KEY,
         HR_RECORDS.LOCATION_KEY AS LOCATION_KEY,
-        HR_RECORDS.RECORD_DATE AS date WITH SYNONYMS=('date','record date','employment date') COMMENT='Date of the HR record',
-        HR_RECORDS.RECORD_MONTH AS MONTH(date) COMMENT='Month of the HR record',
-        HR_RECORDS.RECORD_YEAR AS YEAR(date) COMMENT='Year of the HR record',
+        HR_RECORDS.DATE AS date WITH SYNONYMS=('date','record date','employment date') COMMENT='Date of the HR record',
+        HR_RECORDS.RECORD_MONTH AS MONTH(HR_RECORDS.DATE) COMMENT='Month of the HR record',
+        HR_RECORDS.RECORD_YEAR AS YEAR(HR_RECORDS.DATE) COMMENT='Year of the HR record',
         JOBS.JOB_KEY AS JOB_KEY,
         JOBS.JOB_LEVEL AS job_level WITH SYNONYMS=('level','grade','seniority','civil service level') COMMENT='Job level or grade',
         JOBS.JOB_TITLE AS job_title WITH SYNONYMS=('job title','position','role','civil service title') COMMENT='Employee job title',
@@ -247,10 +216,10 @@ CREATE OR REPLACE SEMANTIC VIEW SF_AI_DEMO.DEMO_SCHEMA.HUMAN_RESOURCES_SEMANTIC_
         LOCATIONS.LOCATION_NAME AS location_name WITH SYNONYMS=('location','office','site','facility') COMMENT='Work location'
     )
     METRICS (
-        HR_RECORDS.ATTRITION_COUNT AS SUM(hr_records.attrition_flag) COMMENT='Number of employees who left',
-        HR_RECORDS.AVG_SALARY AS AVG(hr_records.employee_salary) COMMENT='average employee salary',
-        HR_RECORDS.TOTAL_EMPLOYEES AS COUNT(hr_records.employee_record) COMMENT='Total number of employees',
-        HR_RECORDS.TOTAL_SALARY_COST AS SUM(hr_records.EMPLOYEE_SALARY) COMMENT='Total salary cost'
+        HR_RECORDS.ATTRITION_COUNT AS SUM(HR_RECORDS.ATTRITION_FLAG) COMMENT='Number of employees who left',
+        HR_RECORDS.AVG_SALARY AS AVG(HR_RECORDS.SALARY) COMMENT='average employee salary',
+        HR_RECORDS.TOTAL_EMPLOYEES AS COUNT(HR_RECORDS.EMPLOYEE_RECORD) COMMENT='Total number of employees',
+        HR_RECORDS.TOTAL_SALARY_COST AS SUM(HR_RECORDS.SALARY) COMMENT='Total salary cost'
     )
     COMMENT='Semantic view for HR analytics and workforce management';
 

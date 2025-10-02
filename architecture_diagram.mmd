@@ -1,0 +1,126 @@
+graph TB
+    subgraph "User Interface Layer"
+        U1[City Manager]
+        U2[Budget Analyst]
+        U3[Department Head]
+        U4[Service Representative]
+    end
+    
+    subgraph "Snowflake Intelligence Agent"
+        Agent[Government_City_County_Agent]
+        Orchestration[Orchestration Layer<br/>• Intent Recognition<br/>• Tool Selection<br/>• Multi-step Reasoning]
+    end
+    
+    subgraph "AI Tools & Services"
+        CA[Cortex Analyst<br/>Text-to-SQL]
+        CS[Cortex Search<br/>Vector Search]
+        ET[External Tools<br/>• Web Scraping<br/>• Email<br/>• File Access]
+    end
+    
+    subgraph "Data Layer"
+        subgraph "Semantic Views"
+            SV1[Budget_Finance_View]
+            SV2[Citizen_Services_View]
+            SV3[Public_Communications_View]
+            SV4[Human_Resources_View]
+        end
+        
+        subgraph "Structured Data"
+            subgraph "Fact Tables"
+                F1[service_delivery_fact]
+                F2[budget_transactions]
+                F3[public_communication_fact]
+                F4[city_employee_fact]
+            end
+            
+            subgraph "Dimension Tables"
+                D1[citizen_dim]
+                D2[service_dim]
+                D3[district_dim]
+                D4[department_dim]
+                D5[contractor_dim]
+                D6[employee_dim]
+            end
+        end
+        
+        subgraph "Unstructured Data"
+            DOC1[Budget & Finance Docs]
+            DOC2[HR Documents]
+            DOC3[Citizen Service Docs]
+            DOC4[Public Communication Docs]
+        end
+        
+        subgraph "CRM Integration"
+            CRM1[government_accounts]
+            CRM2[government_contacts]
+            CRM3[government_service_requests]
+        end
+    end
+    
+    subgraph "Search Services"
+        SEARCH1[Budget_Finance_Search]
+        SEARCH2[HR_Search]
+        SEARCH3[Citizen_Services_Search]
+        SEARCH4[Public_Comm_Search]
+    end
+    
+    %% User interactions
+    U1 --> Agent
+    U2 --> Agent
+    U3 --> Agent
+    U4 --> Agent
+    
+    %% Agent orchestration
+    Agent --> Orchestration
+    Orchestration --> CA
+    Orchestration --> CS
+    Orchestration --> ET
+    
+    %% Tool connections
+    CA --> SV1
+    CA --> SV2
+    CA --> SV3
+    CA --> SV4
+    
+    CS --> SEARCH1
+    CS --> SEARCH2
+    CS --> SEARCH3
+    CS --> SEARCH4
+    
+    %% Data connections
+    SV1 --> F2
+    SV1 --> D4
+    SV1 --> D5
+    
+    SV2 --> F1
+    SV2 --> D1
+    SV2 --> D2
+    SV2 --> D3
+    
+    SV3 --> F3
+    SV3 --> CRM1
+    SV3 --> CRM2
+    SV3 --> CRM3
+    
+    SV4 --> F4
+    SV4 --> D6
+    SV4 --> D4
+    
+    %% Search connections
+    SEARCH1 --> DOC1
+    SEARCH2 --> DOC2
+    SEARCH3 --> DOC3
+    SEARCH4 --> DOC4
+    
+    %% Styling
+    classDef userClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef agentClass fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef toolClass fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef dataClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef searchClass fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    
+    class U1,U2,U3,U4 userClass
+    class Agent,Orchestration agentClass
+    class CA,CS,ET toolClass
+    class F1,F2,F3,F4,D1,D2,D3,D4,D5,D6,SV1,SV2,SV3,SV4,CRM1,CRM2,CRM3,DOC1,DOC2,DOC3,DOC4 dataClass
+    class SEARCH1,SEARCH2,SEARCH3,SEARCH4 searchClass

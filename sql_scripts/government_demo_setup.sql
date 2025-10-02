@@ -24,7 +24,7 @@ GRANT ROLE SF_Intelligence_Demo TO USER IDENTIFIER($current_user_name);
 GRANT CREATE DATABASE ON ACCOUNT TO ROLE SF_Intelligence_Demo;
 
 -- Create a dedicated warehouse for the demo with auto-suspend/resume
-CREATE OR REPLACE WAREHOUSE Snow_Intelligence_demo_wh 
+CREATE OR REPLACE WAREHOUSE SNOW_INTELLIGENCE_DEMO_WH 
     WITH WAREHOUSE_SIZE = 'XSMALL'
     AUTO_SUSPEND = 300
     AUTO_RESUME = TRUE;
@@ -34,17 +34,17 @@ GRANT USAGE ON WAREHOUSE SNOW_INTELLIGENCE_DEMO_WH TO ROLE SF_Intelligence_Demo;
 
 -- Alter current user's default role and warehouse to the ones used here
 ALTER USER IDENTIFIER($current_user_name) SET DEFAULT_ROLE = SF_Intelligence_Demo;
-ALTER USER IDENTIFIER($current_user_name) SET DEFAULT_WAREHOUSE = Snow_Intelligence_demo_wh;
+ALTER USER IDENTIFIER($current_user_name) SET DEFAULT_WAREHOUSE = SNOW_INTELLIGENCE_DEMO_WH;
 
 -- Switch to SF_Intelligence_Demo role to create demo objects
 use role SF_Intelligence_Demo;
 
 -- Create database and schema
-CREATE OR REPLACE DATABASE SF_AI_DEMO;
-USE DATABASE SF_AI_DEMO;
+CREATE OR REPLACE DATABASE SPRINGFIELD_GOV;
+USE DATABASE SPRINGFIELD_GOV;
 
-CREATE SCHEMA IF NOT EXISTS DEMO_SCHEMA;
-USE SCHEMA DEMO_SCHEMA;
+CREATE SCHEMA IF NOT EXISTS DEMO;
+USE SCHEMA DEMO;
 
 -- Create file format for CSV files
 CREATE OR REPLACE FILE FORMAT CSV_FORMAT
@@ -496,4 +496,4 @@ UNION ALL
 SELECT '', 'government_contacts', COUNT(*) FROM government_contacts;
 
 -- Show all tables
-SHOW TABLES IN SCHEMA DEMO_SCHEMA;
+SHOW TABLES IN SCHEMA DEMO;
